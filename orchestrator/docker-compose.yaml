@@ -1,0 +1,44 @@
+services:
+  backend:
+    build: ../backend
+    restart: unless-stopped
+    ports:
+      - ${BACKEND_PUBLISHED_PORT}:${BACKEND_TARGET_PORT}
+    volumes:
+      - ../backend:/app
+    environment:
+      ENV: ${ENV}
+      HOST: ${BACKEND_HOST}
+      PORT: ${BACKEND_PUBLISHED_PORT}
+      USE_DEBUG: ${DEBUG}
+      DB_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      DB_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      DB_URL: ${MONGODB_URL}
+      DB_NAME: ${MONGODB_DATABASE}
+    entrypoint: [ "sh", "./entrypoint.sh" ]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:${BACKEND_PUBLISHED_PORT}/healthcheck"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongo:
+    image: mongo:7.0.5
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - db-mongo:/data/db
+
+volumes:
+  db-mongo:
+    driver: local
