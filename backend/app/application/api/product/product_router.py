@@ -20,5 +20,4 @@ async def create(
     product_service: ProductService = Depends(get_product_service),
 ):
     product_data = request.dict()
-    print(product_data)
     return await product_service.create_product(product_data)
