@@ -3,9 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 
-from app.application.api.routes.healthcheck.health_check_router import (
-    health_check_router,
-)
+from app.application.api.routes import api_routers
 from app.infra.config.config import config
 
 app = FastAPI()
@@ -17,7 +15,7 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type", "x-access-token", "responseType"],
 )
 
-app.include_router(health_check_router)
+app.include_router(api_routers)
 
 
 def custom_openapi():
