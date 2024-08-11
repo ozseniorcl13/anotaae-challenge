@@ -1,4 +1,3 @@
-from unicodedata import category
 from pydantic import BaseModel
 
 
@@ -7,5 +6,5 @@ class ProductResponse(BaseModel):
     title: str
     description: str
     price: float
-    category: str
+    category_id: str
     owner_id: str
