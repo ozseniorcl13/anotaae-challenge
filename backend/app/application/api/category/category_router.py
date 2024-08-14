@@ -55,7 +55,7 @@ async def get(
 @category_router.delete(
     "/{category_id}",
     summary="Delete a category",
-    status_code=status.HTTP_200_OK,
+    status_code=status.HTTP_204_NO_CONTENT,
     response_model=CategoryResponse,
 )
 async def delete(
