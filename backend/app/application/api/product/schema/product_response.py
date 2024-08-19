@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from app.application.api.category.schema.category_response import CategoryResponse
 
 
 class ProductResponse(BaseModel):
@@ -6,5 +7,5 @@ class ProductResponse(BaseModel):
     title: str
     description: str
     price: float
-    category_id: str
+    category: CategoryResponse
     owner_id: str

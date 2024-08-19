@@ -1,18 +1,32 @@
-import uuid
-from typing import Optional
-
+from bson import ObjectId
 from pydantic import BaseModel
 
 
 class Product(BaseModel):
-    id: Optional[str] = None
     title: str
     description: str
     price: float
     category_id: str
     owner_id: str
 
-    def __init__(self, **data):
-        super().__init__(**data)
-        if self.id is None:
-            self.id = str(uuid.uuid4())
+    @classmethod
+    def format_from_create(cls, product: dict, id: ObjectId) -> dict:
+        return {
+            "id": str(id),
+            "title": product["title"],
+            "description": product["description"],
+            "price": product["price"],
+            "category": product["category"],
+            "owner_id": product["owner_id"],
+        }
+
+    @classmethod
+    def format_from_get(cls, product) -> dict:
+        return {
+            "id": str(product["_id"]),
+            "title": product["title"],
+            "description": product["description"],
+            "price": product["price"],
+            "category": product["category"],
+            "owner_id": product["owner_id"],
+        }

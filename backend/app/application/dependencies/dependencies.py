@@ -25,8 +25,9 @@ def get_category_repository(
 
 def get_product_service(
     product_repository: ProductRepositoryImpl = Depends(get_product_repository),
+    category_repository: CategoryRepositoryImpl = Depends(get_category_repository),
 ) -> ProductService:
-    return ProductService(product_repository)
+    return ProductService(product_repository, category_repository)
 
 
 def get_category_service(
