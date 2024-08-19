@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: FastAPI",
+            "type": "debugpy",
+            "request": "attach",
+            "port": 9999,
+            "pathMappings": [{
+                "localRoot": "${workspaceFolder}",
+                "remoteRoot": "/app"
+            }],
+        }
+    ]
+}
