@@ -3,8 +3,8 @@ from fastapi import Depends
 from app.domain.category.service.category_service import CategoryService
 from app.infra.database.mongo.mongodb_client import MongoDBClient
 # from app.infra.repository.product_repository_impl import ProductRepositoryImpl
-from app.infra.repository.category_repository_impl import CategoryRepositoryImpl
-
+from app.infra.repository.category_repository_impl import \
+    CategoryRepositoryImpl
 
 # def get_mongo_client() -> MongoDBClient:
 #     return MongoDBClient()

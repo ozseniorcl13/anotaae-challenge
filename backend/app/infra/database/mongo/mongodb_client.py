@@ -2,7 +2,9 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.infra.config.config import config
-from app.infra.database.mongo.document.category_document import CategoryDocument
+from app.infra.database.mongo.document.category_document import \
+    CategoryDocument
+
 
 class MongoDBClient:
     _instance = None

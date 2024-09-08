@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from typing import Optional
+
+from pydantic import BaseModel
 
 
 class CategoryCreateDTO(BaseModel):
@@ -9,6 +10,6 @@ class CategoryCreateDTO(BaseModel):
 
 
 class CategoryUpdateDTO(BaseModel):
-    title: Optional[str]
-    description: Optional[str]
-    owner_id: Optional[str]
+    title: Optional[str] = None
+    description: Optional[str] = None
+    owner_id: Optional[str] = None

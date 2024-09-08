@@ -1,8 +1,17 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 
 
 class CategoryNotFoundException(HTTPException):
     def __init__(self, category_id: int):
         super().__init__(
-            status_code=404, detail=f"Category with ID {category_id} not found"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Category with ID {category_id} not found",
+        )
+
+
+class InvalidIdException(HTTPException):
+    def __init__(self, invalid_id: int):
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"The id {invalid_id} is invalid",
         )
