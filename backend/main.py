@@ -5,8 +5,22 @@ from fastapi.openapi.utils import get_openapi
 
 from app.application.api.routes import api_routers
 from app.infra.config.config import config
+from app.infra.database.mongo.mongodb_client import MongoDBClient
 
 app = FastAPI()
+
+mongo_client = MongoDBClient()
+
+
+@app.on_event("startup")
+async def startup_db_client():
+    await mongo_client.init()
+
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    await mongo_client.close()
+
 
 app.add_middleware(
     CORSMiddleware,
