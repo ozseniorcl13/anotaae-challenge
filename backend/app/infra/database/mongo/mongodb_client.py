@@ -4,6 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from app.infra.config.config import config
 from app.infra.database.mongo.document.category_document import \
     CategoryDocument
+from app.infra.database.mongo.document.product_document import ProductDocument
 
 
 class MongoDBClient:
@@ -20,7 +21,9 @@ class MongoDBClient:
             self.db = self.client[config.DB_NAME]
 
     async def init(self):
-        await init_beanie(database=self.db, document_models=[CategoryDocument])
+        await init_beanie(
+            database=self.db, document_models=[CategoryDocument, ProductDocument]
+        )
 
     async def get_db(self):
         return self.db
