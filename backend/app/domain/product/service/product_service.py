@@ -1,17 +1,15 @@
 from typing import List
+
 from bson import ObjectId
-from app.application.api.product.dto.product_request import (
-    ProductCreateDTO,
-    ProductUpdateDTO,
-)
+
+from app.application.api.product.dto.product_request import (ProductCreateDTO,
+                                                             ProductUpdateDTO)
 from app.application.api.product.dto.product_response import ProductResponseDTO
+from app.domain.category.service.category_service import CategoryService
 from app.domain.product.entity.product import Product
 from app.domain.product.exception.product_exception import (
-    ProductNotFoundException,
-    InvalidIdException,
-)
+    InvalidIdException, ProductNotFoundException)
 from app.domain.product.repository.product_repository import ProductRepository
-from app.domain.category.service.category_service import CategoryService
 
 
 class ProductService:

@@ -2,10 +2,8 @@ from typing import List
 
 from fastapi import APIRouter, Depends, status
 
-from app.application.api.product.dto.product_request import (
-    ProductCreateDTO,
-    ProductUpdateDTO,
-)
+from app.application.api.product.dto.product_request import (ProductCreateDTO,
+                                                             ProductUpdateDTO)
 from app.application.api.product.dto.product_response import ProductResponseDTO
 from app.application.dependencies.dependencies import get_product_service
 from app.domain.product.service.product_service import ProductService

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
-from app.application.api.category.dto.category_response import CategoryResponseDTO
+from app.application.api.category.dto.category_response import \
+    CategoryResponseDTO
 
 
 class ProductResponseDTO(BaseModel):

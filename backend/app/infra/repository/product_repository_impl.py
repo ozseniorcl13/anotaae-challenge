@@ -1,4 +1,5 @@
 from typing import List
+
 from app.domain.product.entity.product import Product
 from app.infra.database.mongo.document.product_document import ProductDocument
 
