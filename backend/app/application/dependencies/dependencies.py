@@ -1,11 +1,11 @@
 from fastapi import Depends
 
 from app.domain.category.service.category_service import CategoryService
-from app.infra.repository.product_repository_impl import ProductRepositoryImpl
-from app.infra.repository.category_repository_impl import \
-    CategoryRepositoryImpl
 from app.domain.product.service.product_service import ProductService
 from app.infra.aws.ssm.ssm_service import SSMService, ssm_service
+from app.infra.repository.category_repository_impl import \
+    CategoryRepositoryImpl
+from app.infra.repository.product_repository_impl import ProductRepositoryImpl
 
 
 def get_ssm_service() -> SSMService:
