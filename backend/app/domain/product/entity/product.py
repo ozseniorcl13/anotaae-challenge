@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 
 from pydantic import BaseModel
@@ -15,3 +16,6 @@ class Product(BaseModel):
         for key, value in update_data.items():
             if value is not None:
                 setattr(self, key, value)
+
+    def to_string(self) -> str:
+        return self.model_dump_json()

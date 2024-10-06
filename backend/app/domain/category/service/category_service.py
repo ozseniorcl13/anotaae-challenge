@@ -11,15 +11,29 @@ from app.domain.category.exception.category_exception import (
     CategoryNotFoundException, InvalidIdException)
 from app.domain.category.repository.category_repository import \
     CategoryRepository
+from app.infra.aws.sqs.sqs_service import SQSService
+from app.infra.aws.ssm.ssm_keys import ssm_keys
+from app.infra.aws.ssm.ssm_service import SSMService
 
 
 class CategoryService:
-    def __init__(self, category_repository: CategoryRepository):
+
+    def __init__(
+        self,
+        category_repository: CategoryRepository,
+        ssm_service: SSMService,
+        sqs_service: SQSService,
+    ):
         self.category_repository = category_repository
+        self.sqs_service = sqs_service
+        self.sqs_url = ssm_service.get(ssm_keys["sqs_catalog"])
 
     async def create(self, category_data: CategoryCreateDTO) -> CategoryResponseDTO:
         category = Category(**category_data.dict())
         created_category = await self.category_repository.create(category)
+
+        self.sqs_service.send_message(self.sqs_url, created_category.to_string())
+
         return CategoryResponseDTO(**created_category.dict())
 
     async def get_all(self) -> List[CategoryResponseDTO]:
@@ -47,6 +61,8 @@ class CategoryService:
 
         category.update_values(category_data.dict(exclude_unset=True))
         updated_category = await self.category_repository.update(id, category)
+
+        self.sqs_service.send_message(self.sqs_url, updated_category.to_string())
 
         return CategoryResponseDTO(**updated_category.dict())
 
